@@ -6,6 +6,7 @@ Template.locationEdit.events({
 
     var locationProperties = {
       url: $(e.target).find('[name=url]').val(),
+      description: $(e.target).find('[name=description]').val(),
       title: $(e.target).find('[name=title]').val()
     }
 

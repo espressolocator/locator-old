@@ -3,14 +3,18 @@ Template.locationSubmit.events({
     e.preventDefault();
 
     var location = {
-      url: $(e.target).find('[name=url]').val(),
-      title: $(e.target).find('[name=title]').val()
+      title: $(e.target).find('[name=title]').val(),
+      description: $(e.target).find('[name=description]').val(),
+      url: $(e.target).find('[name=url]').val()
     };
 
     Meteor.call('locationInsert', location, function(error, result) {
       // display the error to the user and abort
-      if (error)
+      if (error.reason == 'Match failed') {
+        alert('One of required fields is empty.');
+      } else {
         return alert(error.reason);
+      }
 
       // show this result but route anyway
       if (result.locationExists)
