@@ -1,6 +1,6 @@
 Template.locationItem.helpers({
   ownSubmission: function() {
-    return this.userId === Meteor.userId();
+    return this.createdBy.userId === Meteor.userId();
   },
   domain: function() {
     var a = document.createElement('a');

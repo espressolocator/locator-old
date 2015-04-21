@@ -3,7 +3,7 @@
     <div class="location-content">
       <h3><a href="{{url}}">{{title}}</a><span>{{domain}}</span></h3>
       <p>
-        submitted by {{author}},
+        submitted by {{createdBy.username}},
         <a href="{{pathFor 'locationPage'}}">{{commentsCount}} comments</a>
         {{#if ownSubmission}}<a href="{{pathFor 'locationEdit'}}">Edit</a>{{/if}}
       </p>

@@ -4,22 +4,22 @@ if (Locations.find().count() === 0) {
 
   // create two users
   var tomId = Meteor.users.insert({
-    profile: { name: 'Tom Coleman' }
+    profile: { name: 'tomcoleman' }
   });
   var tom = Meteor.users.findOne(tomId);
   var sachaId = Meteor.users.insert({
-    profile: { name: 'Sacha Greif' }
+    profile: { name: 'sachagreif' }
   });
   var sacha = Meteor.users.findOne(sachaId);
 
   var telescopeId = Locations.insert({
     title: 'Introducing Telescope',
-    userId: sacha._id,
-    author: sacha.profile.name,
+    description: 'Some description',
     url: 'http://sachagreif.com/introducing-telescope/',
-    submitted: new Date(now - 7 * 3600 * 1000),
+    createdAt: new Date(now - 7 * 3600 * 1000),
+    createdBy: { userId: sacha._id, username: sacha.profile.name },
     commentsCount: 2
-  });
+  }, { getAutoValues: false } );
 
   Comments.insert({
     locationId: telescopeId,
@@ -39,19 +39,19 @@ if (Locations.find().count() === 0) {
 
   Locations.insert({
     title: 'Meteor',
-    userId: tom._id,
-    author: tom.profile.name,
+    description: 'Some description',
     url: 'http://meteor.com',
-    submitted: new Date(now - 10 * 3600 * 1000),
+    createdAt: new Date(now - 10 * 3600 * 1000),
+    createdBy: { userId: tom._id, username: tom.profile.name },
     commentsCount: 0
-  });
+  }, { getAutoValues: false });
 
   Locations.insert({
     title: 'The Meteor Book',
-    userId: tom._id,
-    author: tom.profile.name,
+    description: 'Some description',
     url: 'http://themeteorbook.com',
-    submitted: new Date(now - 12 * 3600 * 1000),
+    createdAt: new Date(now - 12 * 3600 * 1000),
+    createdBy: { userId: tom._id, username: tom.profile.name },
     commentsCount: 0
-  });
+  }, { getAutoValues: false });
 }
