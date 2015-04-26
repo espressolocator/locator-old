@@ -17,32 +17,30 @@ if (Locations.find().count() === 0) {
     description: 'Some description',
     url: 'http://sachagreif.com/introducing-telescope/',
     createdAt: new Date(now - 7 * 3600 * 1000),
-    createdBy: { userId: sacha._id, username: sacha.profile.name },
+    createdBy: { userId: sacha._id, author: sacha.profile.name },
     commentsCount: 2
   }, { getAutoValues: false } );
 
   Comments.insert({
     locationId: telescopeId,
-    userId: tom._id,
-    author: tom.profile.name,
-    submitted: new Date(now - 5 * 3600 * 1000),
+    createdBy: { userId: tom._id, author: tom.profile.name },
+    createdAt: new Date(now - 5 * 3600 * 1000),
     body: 'Interesting project Sacha, can I get involved?'
-  });
+  }, { getAutoValues: false });
 
   Comments.insert({
     locationId: telescopeId,
-    userId: sacha._id,
-    author: sacha.profile.name,
-    submitted: new Date(now - 3 * 3600 * 1000),
+    createdBy: { userId: sacha._id, author: sacha.profile.name },
+    createdAt: new Date(now - 3 * 3600 * 1000),
     body: 'You sure can Tom!'
-  });
+  }, { getAutoValues: false });
 
   Locations.insert({
     title: 'Meteor',
     description: 'Some description',
     url: 'http://meteor.com',
     createdAt: new Date(now - 10 * 3600 * 1000),
-    createdBy: { userId: tom._id, username: tom.profile.name },
+    createdBy: { userId: tom._id, author: tom.profile.name },
     commentsCount: 0
   }, { getAutoValues: false });
 
@@ -51,7 +49,7 @@ if (Locations.find().count() === 0) {
     description: 'Some description',
     url: 'http://themeteorbook.com',
     createdAt: new Date(now - 12 * 3600 * 1000),
-    createdBy: { userId: tom._id, username: tom.profile.name },
+    createdBy: { userId: tom._id, author: tom.profile.name },
     commentsCount: 0
   }, { getAutoValues: false });
 }
