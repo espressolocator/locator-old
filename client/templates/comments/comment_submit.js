@@ -1,38 +1,23 @@
-Template.commentSubmit.created = function() {
-  Session.set('commentSubmitErrors', {});
-}
-
-Template.commentSubmit.helpers({
-  errorMessage: function(field) {
-    return Session.get('commentSubmitErrors')[field];
-  },
-  errorClass: function (field) {
-    return !!Session.get('commentSubmitErrors')[field] ? 'has-error' : '';
-  }
-});
-
-Template.commentSubmit.events({
-  'submit form': function(e, template) {
-    e.preventDefault();
-
-    var $body = $(e.target).find('[name=body]');
-    var comment = {
-      body: $body.val(),
-      locationId: template.data._id
-    };
-
-    var errors = {};
-    if (! comment.body) {
-      errors.body = "Please write some content";
-      return Session.set('commentSubmitErrors', errors);
-    }
-
-    Meteor.call('commentInsert', comment, function(error, commentId) {
-      if (error){
-        throwError(error.reason);
-      } else {
-        $body.val('');
-      }
-    });
+AutoForm.hooks({
+  insertCommentForm: {
+    before: {
+      insert: function(comment) {
+        var user = Meteor.user();
+        var location = Locations.findOne(comment.locationId);
+        if (!location) {
+            throw new Meteor.Error('invalid-comment', 'You must comment on a location');
+        }
+        comment = _.extend(comment, {
+            createdBy: {
+            userId: user._id,
+            author: user.username
+            }
+        });
+        // update the post with the number of comments
+        Locations.update(comment.locationId, {$inc: {commentsCount: 1}});
+        console.log(comment);
+        return comment;
+      },
+    },
   }
 });
