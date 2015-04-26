@@ -1,5 +1,5 @@
 <template name="commentSubmit">
-  {{# autoForm collection="Comments" id="insertCommentForm" type="insert" class="comment-form form"}}
+  {{#autoForm schema="commentSchema" id="insertCommentForm" type="method" meteormethod="commentInsert" class="comment-form form"}}
     {{> afQuickField name='body'}}
     {{> afQuickField name='locationId' type='hidden' value=_id}}
     <button type="submit" class="btn btn-primary">Add comment</button>
