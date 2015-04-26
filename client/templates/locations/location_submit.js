@@ -1,7 +1,13 @@
 AutoForm.hooks({
   insertLocationForm: {
     onSuccess: function(formType, result) {
-      Router.go('locationPage', {_id: this.docId});
+      this.resetForm();
+      Router.go('locationPage', {_id: result._id});
     },
+    onError: function(formType, error) {
+      if (error.error === 'urlnotunique') {
+        this.validationContext.addInvalidKeys([{name: "url", type: "notUnique"}]);
+      }
+    }
   }
 });

@@ -1,3 +1,3 @@
 <template name="locationSubmit">
-  {{> quickForm collection="Locations" id="insertLocationForm" type="insert" class="main form page"}}
+  {{> quickForm schema="locationSchema" id="insertLocationForm" type="method" meteormethod="locationInsert" class="main form page"}}
 </template>
