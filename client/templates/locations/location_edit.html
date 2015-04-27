@@ -1,5 +1,5 @@
 <template name="locationEdit">
-  {{#autoForm collection="Locations" id="editLocationForm" type="update" doc=this class="main form page"}}
+  {{#autoForm schema="locationSchema" id="editLocationForm" type="method-update" doc=this meteormethod="locationEdit" class="main form page"}}
     {{> afQuickField name='title'}}
     {{> afQuickField name='description'}}
     {{> afQuickField name='url'}}
