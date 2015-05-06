@@ -2,6 +2,11 @@
 if (Locations.find().count() === 0) {
   var now = new Date().getTime();
 
+  // create admin user
+  Accounts.createUser({username: 'admin', email: 'admin@test.com', password: '11evi0880', profile: { name: 'Site admin' }});
+  Roles.addUsersToRoles(Meteor.users.find({username: 'admin'}).fetch(), ['admin']);
+
+
   // create two users
   var tomId = Meteor.users.insert({
     profile: { name: 'tomcoleman' }
