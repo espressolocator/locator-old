@@ -1,6 +1,6 @@
 Template.locationItem.helpers({
-  ownSubmission: function() {
-    return this.createdBy.userId === Meteor.userId();
+  canEdit: function() {
+    return ((this.createdBy.userId === Meteor.userId()) || Roles.userIsInRole(Meteor.user(), ['admin']));
   },
   domain: function() {
     var a = document.createElement('a');

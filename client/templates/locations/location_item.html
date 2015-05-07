@@ -5,7 +5,7 @@
       <p>
         submitted by {{createdBy.author}},
         <a href="{{pathFor 'locationPage'}}">{{commentsCount}} comments</a>
-        {{#if ownSubmission}}<a href="{{pathFor 'locationEdit'}}">Edit</a>{{/if}}
+        {{#if canEdit}}<a href="{{pathFor 'locationEdit'}}">Edit</a>{{/if}}
       </p>
     </div>
     <a href="{{pathFor 'locationPage'}}" class="discuss btn btn-default">Discuss</a>
