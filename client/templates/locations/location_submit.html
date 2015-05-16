@@ -1,3 +1,10 @@
 <template name="locationSubmit">
-  {{> quickForm schema="locationSchema" id="insertLocationForm" type="method" meteormethod="locationInsert" class="main form page"}}
+  {{#autoForm schema="locationSchema" id="insertLocationForm" type="method" meteormethod="locationInsert" class="main form page"}}
+    {{> afQuickField name='title'}}
+    {{> afQuickField name='description'}}
+    {{> afQuickField name='url'}}
+    <div class="form-group">
+      <input type="submit" value="Submit" class="btn btn-primary submit"/>
+    </div>
+  {{/autoForm}}
 </template>
