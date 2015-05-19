@@ -36,3 +36,24 @@ AutoForm.hooks({
     }
   }
 });
+
+Template.locationEdit.onRendered(function() {
+  var searchNode = $("#mapsearch");
+  this.autorun(function (c) {
+    if (GoogleMaps.loaded()) {
+      var lat = AutoForm.getFieldValue('location.lat', 'editLocationForm');
+      var lng = AutoForm.getFieldValue('location.lng', 'editLocationForm');
+      addGeocomplete(searchNode, {
+        details: "#editLocationForm",
+        location: new google.maps.LatLng(lat, lng)
+      });
+      c.stop();
+    }
+  });
+});
+
+Template.locationEdit.onCreated(function() {
+  GoogleMaps.load({
+    libraries: 'places'
+  });
+});

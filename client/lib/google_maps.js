@@ -18,7 +18,7 @@ addGeocomplete = function (searchNode, initProperties) {
   searchNode.geocomplete(initProperties);
 
   // Pick current location from the browser.
-  if (navigator.geolocation) {
+  if (!initProperties.location && navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
       var currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
       var map = searchNode.geocomplete("map");
