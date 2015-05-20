@@ -3,13 +3,14 @@ addGeocomplete = function (searchNode, initProperties) {
     map: ".map-container",
     detailsAttribute: "data-geo",
     mapOptions: {
-      zoom: 15,
+      zoom: 17,
       scrollwheel: true,
       streetViewControl: false
     },
     markerOptions: {
       draggable: true
-    }
+    },
+    types: ['geocode', 'establishment']
   };
   // Merge defaults and custom properties, initProperties should provide 'details' parameter at least.
   initProperties = _.extend(defaultProperties, initProperties);
