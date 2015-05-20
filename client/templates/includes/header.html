@@ -12,7 +12,10 @@
       </div>
       <div class="collapse navbar-collapse" id="navigation">
         <ul class="nav navbar-nav">
-          {{#if currentUser}}<li><a href="{{pathFor 'locationSubmit'}}">Submit new location</a></li>{{/if}}
+          {{#if currentUser}}
+            <li><a href="{{pathFor 'locationSubmit'}}">Submit new location</a></li>
+            <li class="dropdown">{{> notifications}}</li>
+          {{/if}}
           {{#if isAdminUser}}<li><a href="{{pathFor 'accountsAdmin'}}">Admin</a></li>{{/if}}
         </ul>
         <ul class="nav navbar-nav navbar-right">
