@@ -26,9 +26,10 @@ AutoForm.hooks({
 });
 
 Template.locationSubmit.onRendered(function() {
-  var searchNode = $("#mapsearch");
+  var self = this;
   this.autorun(function (c) {
     if (GoogleMaps.loaded()) {
+      var searchNode = self.$("#mapsearch");
       addGeocomplete(searchNode, { details: "#insertLocationForm" });
       c.stop();
     }

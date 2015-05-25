@@ -38,9 +38,10 @@ AutoForm.hooks({
 });
 
 Template.locationEdit.onRendered(function() {
-  var searchNode = $("#mapsearch");
+  var self = this;
   this.autorun(function (c) {
     if (GoogleMaps.loaded()) {
+      var searchNode = self.$("#mapsearch");
       var lat = AutoForm.getFieldValue('location.lat', 'editLocationForm');
       var lng = AutoForm.getFieldValue('location.lng', 'editLocationForm');
       addGeocomplete(searchNode, {

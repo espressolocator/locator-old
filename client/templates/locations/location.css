@@ -2,6 +2,11 @@
   width: 100%;
   max-width: 100%;
   height: 250px;
+  margin-bottom: 10px;
+}
+
+.search-locations {
+  margin-bottom: 10px;
 }
 
 .pac-container:after {  /* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */

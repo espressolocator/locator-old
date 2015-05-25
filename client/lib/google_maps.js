@@ -21,18 +21,24 @@ addGeocomplete = function (searchNode, initProperties) {
   // Pick current location from the browser.
   if (!initProperties.location && navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
+      // Position map.
       var currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
       var map = searchNode.geocomplete("map");
       map.setCenter(currentLocation);
+      // Add marker if it is enabled.
       var marker = searchNode.geocomplete("marker");
-      marker.setPosition(currentLocation);
-      searchNode.trigger("geocode:dragged", currentLocation);
+      if (marker) {
+        marker.setPosition(currentLocation);
+        searchNode.trigger("geocode:dragged", currentLocation);
+      }
     });
   }
 
-  // Bind marker dragging updates.
-  searchNode.bind("geocode:dragged", function(event, latLng) {
-    $("input[data-geo=lat]").val(latLng.lat());
-    $("input[data-geo=lng]").val(latLng.lng());
-  });
+  // Bind marker dragging updates if details form exist.
+  if (initProperties.details) {
+    searchNode.bind("geocode:dragged", function(event, latLng) {
+      $("input[data-geo=lat]").val(latLng.lat());
+      $("input[data-geo=lng]").val(latLng.lng());
+    });
+  }
 }
