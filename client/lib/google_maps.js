@@ -37,8 +37,7 @@ addGeocomplete = function (searchNode, initProperties) {
   // Bind marker dragging updates if details form exist.
   if (initProperties.details) {
     searchNode.bind("geocode:dragged", function(event, latLng) {
-      $("input[data-geo=lat]").val(latLng.lat());
-      $("input[data-geo=lng]").val(latLng.lng());
+      $("input[data-geo=location]").val(latLng.lat()+','+latLng.lng());
     });
   }
 }

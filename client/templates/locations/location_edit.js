@@ -13,13 +13,24 @@ Template.locationEdit.events({
 AutoForm.hooks({
   editLocationForm: {
     before: {
-      "method-update": function(doc) {
+      "method-update": function(modifier) {
         // Remove sticky validation errors if any.
         if (this.validationContext.keyIsInvalid('url')) {
           this.removeStickyValidationError('url');
         }
-        return doc;
+        var latlng = modifier.$set.location.split(',');
+        modifier.$set.location = { type: "Point", coordinates: [ parseFloat(latlng[1]), parseFloat(latlng[0]) ] };
+        return modifier;
       }
+    },
+    docToForm: function(doc) {
+      var latlng = doc.location.coordinates.reverse();
+      doc.location = latlng.join(',');
+      return doc;
+    },
+    formToModifier: function(modifier) {
+      // Does not seems work, using "before" hook to amend object.
+      return modifier;
     },
     onSuccess: function(formType, result) {
       // Reset validation and form prior to redirection.
@@ -42,11 +53,10 @@ Template.locationEdit.onRendered(function() {
   this.autorun(function (c) {
     if (GoogleMaps.loaded()) {
       var searchNode = self.$("#mapsearch");
-      var lat = AutoForm.getFieldValue('location.lat', 'editLocationForm');
-      var lng = AutoForm.getFieldValue('location.lng', 'editLocationForm');
+      var latlng = AutoForm.getFieldValue('location', 'editLocationForm').split(',');
       addGeocomplete(searchNode, {
         details: "#editLocationForm",
-        location: new google.maps.LatLng(lat, lng)
+        location: new google.maps.LatLng(latlng[0], latlng[1])
       });
       c.stop();
     }

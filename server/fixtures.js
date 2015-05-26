@@ -23,7 +23,7 @@ if (Locations.find().count() === 0) {
     url: 'http://sachagreif.com/introducing-telescope/',
     createdAt: new Date(now - 7 * 3600 * 1000),
     createdBy: { userId: sacha._id, author: sacha.profile.name },
-    location: { lng: "-2.782137641247573", lat: "54.0307393841768" },
+    location: { type: "Point", coordinates: [ -2.782137641247573, 54.0307393841768 ] },
     address: "Kempton Road, Lancaster, United Kingdom",
     commentsCount: 2
   }, { getAutoValues: false } );
@@ -48,7 +48,7 @@ if (Locations.find().count() === 0) {
     url: 'http://meteor.com',
     createdAt: new Date(now - 10 * 3600 * 1000),
     createdBy: { userId: tom._id, author: tom.profile.name },
-    location: { lng: "-0.5883418836059491", lat: "44.834658819555" },
+    location:  { type: "Point", coordinates: [ -0.5883418836059491, 44.834658819555 ] },
     address: "33000 Bordeaux, France",
     commentsCount: 0
   }, { getAutoValues: false });
@@ -59,7 +59,7 @@ if (Locations.find().count() === 0) {
     url: 'http://themeteorbook.com',
     createdAt: new Date(now - 12 * 3600 * 1000),
     createdBy: { userId: tom._id, author: tom.profile.name },
-    location: { lng: "-2.7904901053100275", lat: "54.032038435284264" },
+    location:  { type: "Point", coordinates: [ -2.7904901053100275, 54.032038435284264 ] },
     address: "27 Bowerham Road, Lancaster, United Kingdom",
     commentsCount: 0
   }, { getAutoValues: false });
