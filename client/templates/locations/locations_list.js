@@ -22,6 +22,16 @@ Template.locationsList.onRendered(function() {
         types: ['(regions)']
       }
       addGeocomplete(searchLocationInput, mapProperties);
+
+      // Use idle state and update search result and markers.
+      var map = searchLocationInput.geocomplete("map");
+      google.maps.event.addListener(map, 'idle', function() {
+        var bounds = map.getBounds();
+        var ne = bounds.getNorthEast();
+        var sw = bounds.getSouthWest();
+        var boundsObject = {ne: {lng: ne.lng(), lat: ne.lat()}, sw: {lng: sw.lng(), lat: sw.lat()}};
+        Session.set('mapBounds', boundsObject);
+      });
       c.stop();
     }
   });
