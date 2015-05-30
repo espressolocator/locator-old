@@ -5,7 +5,7 @@ Template.locationEdit.events({
     if (confirm("Delete this location?")) {
       var currentLocationId = this._id;
       Locations.remove(currentLocationId);
-      Router.go('locationsList');
+      Router.go('locationsPage');
     }
   }
 });

@@ -8,12 +8,12 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="{{pathFor 'locationsList'}}">Espresso Locator</a>
+        <a class="navbar-brand" href="{{pathFor 'locationsPage'}}">Espresso Locator</a>
       </div>
       <div class="collapse navbar-collapse" id="navigation">
         <ul class="nav navbar-nav">
           {{#if currentUser}}
-            <li><a href="{{pathFor 'locationSubmit'}}">Submit new location</a></li>
+            <li><a href="{{pathFor 'locationSubmit'}}">Suggest new location</a></li>
             <li class="dropdown">{{> notifications}}</li>
           {{/if}}
           {{#if isAdminUser}}<li><a href="{{pathFor 'accountsAdmin'}}">Admin</a></li>{{/if}}
