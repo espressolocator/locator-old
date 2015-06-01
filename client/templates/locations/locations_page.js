@@ -1,3 +1,9 @@
+Template.locationsPage.helpers({
+  locations: function() {
+    return Template.instance().locations();
+  }
+});
+
 Template.locationsPage.onRendered(function() {
   var self = this;
   this.autorun(function(c) {
@@ -37,4 +43,14 @@ Template.locationsPage.onCreated(function() {
   GoogleMaps.load({
     libraries: 'places'
   });
+
+  var instance = this;
+  instance.autorun(function () {
+    // Subscribe to the locations publication.
+    var subscription = instance.subscribe('locations', Session.get('mapBounds'));
+  });
+  // Locations cursor.
+  instance.locations = function() {
+    return Locations.find({}, {sort: {submitted: -1}});
+  }
 });

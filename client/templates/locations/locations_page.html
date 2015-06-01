@@ -3,5 +3,9 @@
     <input class="form-control input-lg search-locations-input" type="text" placeholder="Search location...">
   </div>
   <div class="map-container"></div>
-  {{> locationsList}}
+  <div class="locations">
+    {{#each locations}}
+      {{> locationItem}}
+    {{/each}}
+  </div>
 </template>
