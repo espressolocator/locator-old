@@ -1,20 +1,14 @@
 Meteor.publish('locations', function(bounds) {
-  if (Match.test(bounds, null)) {
-      check(bounds, null);
+  if (Match.test(bounds, [Number])) {
+      check(bounds, [Number]);
       return [];
   }
-  check(bounds, {ne: {lng: Number, lat: Number}, sw: {lng: Number, lat: Number}});
+  check(bounds, [[Number]]);
   var polygon = {
     type: "Polygon",
-    coordinates: [[
-      [bounds.ne.lng, bounds.ne.lat],
-      [bounds.sw.lng, bounds.ne.lat],
-      [bounds.sw.lng, bounds.sw.lat],
-      [bounds.ne.lng, bounds.sw.lat],
-      [bounds.ne.lng, bounds.ne.lat]
-    ]]
+    coordinates: [bounds]
   };
-  return Locations.find({location: {$geoWithin: {$geometry: polygon}}});;
+  return Locations.find({location: {$geoWithin: {$geometry: polygon}}}, {sort: {submitted: -1}});
 });
 
 Meteor.publish('comments', function(locationId) {

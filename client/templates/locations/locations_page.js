@@ -30,8 +30,14 @@ Template.locationsPage.onRendered(function() {
         if (bounds) {
           var ne = bounds.getNorthEast();
           var sw = bounds.getSouthWest();
-          var boundsObject = {ne: {lng: ne.lng(), lat: ne.lat()}, sw: {lng: sw.lng(), lat: sw.lat()}};
-          instance.mapBounds.set(boundsObject);
+          var boundsCoordinates = [
+            [ne.lng(), ne.lat()],
+            [sw.lng(), ne.lat()],
+            [sw.lng(), sw.lat()],
+            [ne.lng(), sw.lat()],
+            [ne.lng(), ne.lat()]
+          ];
+          instance.mapBoundsCoordinates.set(boundsCoordinates);
         }
       });
       c.stop();
@@ -48,11 +54,14 @@ Template.locationsPage.onCreated(function() {
   var instance = this;
 
   // Init reactive var.
-  instance.mapBounds = new ReactiveVar({});
+  instance.mapBoundsCoordinates = new ReactiveVar([]);
 
   instance.autorun(function () {
     // Subscribe to the locations publication.
-    var subscription = instance.subscribe('locations', instance.mapBounds.get());
+    var subscription = instance.subscribe('locations', instance.mapBoundsCoordinates.get());
+    if (subscription.ready()) {
+      console.log(instance.locations().count());
+    }
   });
   // Locations cursor.
   instance.locations = function() {
