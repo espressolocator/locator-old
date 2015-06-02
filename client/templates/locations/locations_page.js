@@ -5,12 +5,12 @@ Template.locationsPage.helpers({
 });
 
 Template.locationsPage.onRendered(function() {
-  var self = this;
+  var instance = this;
   this.autorun(function(c) {
     if (GoogleMaps.loaded()) {
-      var searchLocationInput = self.$('.search-locations-input');
+      var searchLocationInput = instance.$('.search-locations-input');
       var mapProperties = {
-        map: self.$('.map-container'),
+        map: instance.$('.map-container'),
         mapOptions: {
           zoom: 12,
           scrollwheel: true,
@@ -31,7 +31,7 @@ Template.locationsPage.onRendered(function() {
           var ne = bounds.getNorthEast();
           var sw = bounds.getSouthWest();
           var boundsObject = {ne: {lng: ne.lng(), lat: ne.lat()}, sw: {lng: sw.lng(), lat: sw.lat()}};
-          Session.set('mapBounds', boundsObject);
+          instance.mapBounds.set(boundsObject);
         }
       });
       c.stop();
@@ -40,14 +40,19 @@ Template.locationsPage.onRendered(function() {
 });
 
 Template.locationsPage.onCreated(function() {
+  // Init Googlemaps.
   GoogleMaps.load({
     libraries: 'places'
   });
 
   var instance = this;
+
+  // Init reactive var.
+  instance.mapBounds = new ReactiveVar({});
+
   instance.autorun(function () {
     // Subscribe to the locations publication.
-    var subscription = instance.subscribe('locations', Session.get('mapBounds'));
+    var subscription = instance.subscribe('locations', instance.mapBounds.get());
   });
   // Locations cursor.
   instance.locations = function() {
