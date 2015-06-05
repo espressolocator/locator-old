@@ -1,6 +1,6 @@
 Meteor.publish('locations', function(bounds) {
-  if (Match.test(bounds, [Number])) {
-      check(bounds, [Number]);
+  if (Match.test(bounds, null)) {
+      check(bounds, null);
       return [];
   }
   check(bounds, [[Number]]);

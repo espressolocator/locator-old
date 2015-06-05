@@ -54,7 +54,7 @@ Template.locationsPage.onCreated(function() {
   var instance = this;
 
   // Init reactive var.
-  instance.mapBoundsCoordinates = new ReactiveVar([]);
+  instance.mapBoundsCoordinates = new ReactiveVar(null);
 
   instance.autorun(function () {
     // Subscribe to the locations publication.
