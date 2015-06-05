@@ -51,6 +51,8 @@ Template.locationsPage.onCreated(function() {
     libraries: 'places'
   });
 
+  var markers = {};
+
   var instance = this;
 
   // Init reactive var.
@@ -60,7 +62,21 @@ Template.locationsPage.onCreated(function() {
     // Subscribe to the locations publication.
     var subscription = instance.subscribe('locations', instance.mapBoundsCoordinates.get());
     if (subscription.ready()) {
-      console.log(instance.locations().count());
+      if (instance.locations().count()) {
+        var map = instance.$('.search-locations-input').geocomplete("map");
+        instance.locations().forEach(function(location) {
+          if (!markers[location._id]) {
+            var latLng = new google.maps.LatLng(location.location.coordinates[1], location.location.coordinates[0]);
+            var marker = new google.maps.Marker({
+              position: latLng,
+              map: map,
+              title: 'Hello World!',
+              id: location._id
+            });
+            markers[location._id] = marker;
+          }
+        });
+      }
     }
   });
   // Locations cursor.
