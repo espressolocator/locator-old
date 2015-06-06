@@ -50,8 +50,10 @@ Template.locationsPage.onCreated(function() {
   GoogleMaps.load({
     libraries: 'places'
   });
-
+  // Declare markers array.
   var markers = {};
+  // Declare opened infowindow reference.
+  var openedInfoWindow = null;
 
   var instance = this;
 
@@ -62,11 +64,15 @@ Template.locationsPage.onCreated(function() {
     // Subscribe to the locations publication.
     var subscription = instance.subscribe('locations', instance.mapBoundsCoordinates.get());
     if (subscription.ready()) {
+      // If at least one location avialable, add marker.
       if (instance.locations().count()) {
         var map = instance.$('.search-locations-input').geocomplete("map");
+        // Iterate through found locations.
         instance.locations().forEach(function(location) {
+          // See if we already have marker on the map.
           if (!markers[location._id]) {
             var latLng = new google.maps.LatLng(location.location.coordinates[1], location.location.coordinates[0]);
+            // Create marker.
             var marker = new google.maps.Marker({
               position: latLng,
               map: map,
@@ -74,6 +80,22 @@ Template.locationsPage.onCreated(function() {
               icon: 'logo-icon-marker.png',
               id: location._id
             });
+            // Create infowindow.
+            var infoWindow = new google.maps.InfoWindow({
+              content: '<div>'+location.title+'</div>'
+            });
+            // Add event to show infowindow.
+            google.maps.event.addListener(marker, 'click', function() {
+              // Close infowindow that was open previously.
+              if (openedInfoWindow) {
+                openedInfoWindow.close();
+              }
+              // Open the one user clicked on and store its reference in
+              // variable, so we can close it later.
+              infoWindow.open(map, marker);
+              openedInfoWindow = infoWindow;
+            });
+            // Add marker to markers array, so we do not recreate it in future.
             markers[location._id] = marker;
           }
         });
