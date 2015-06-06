@@ -70,7 +70,8 @@ Template.locationsPage.onCreated(function() {
             var marker = new google.maps.Marker({
               position: latLng,
               map: map,
-              title: 'Hello World!',
+              title: location.title,
+              icon: 'logo-icon-marker.png',
               id: location._id
             });
             markers[location._id] = marker;
