@@ -23,9 +23,13 @@ Template.locationsPage.onRendered(function() {
       }
       addGeocomplete(searchLocationInput, mapProperties);
 
-      // Use idle state and update search result and markers.
+      // Map idle state listener. It is useful to track the end of any map
+      // action such as zoom or repositioning. Once user is finished with
+      // map action we update search result and markers.
       var map = searchLocationInput.geocomplete("map");
       google.maps.event.addListener(map, 'idle', function() {
+        // Ger current map bounds, conver them to polygon and save in reactive
+        // variable that will trigger subscription update.
         var bounds = map.getBounds();
         if (bounds) {
           var ne = bounds.getNorthEast();
@@ -40,6 +44,13 @@ Template.locationsPage.onRendered(function() {
           instance.mapBoundsCoordinates.set(boundsCoordinates);
         }
       });
+      // Map click event listener.
+      google.maps.event.addListener(map, 'click', function(event) {
+        // Close infowindow if it is open.
+        if (instance.openedInfoWindow) {
+          instance.openedInfoWindow.close();
+        }
+      });
       c.stop();
     }
   });
@@ -52,16 +63,16 @@ Template.locationsPage.onCreated(function() {
   });
   // Declare markers array.
   var markers = {};
-  // Declare opened infowindow reference.
-  var openedInfoWindow = null;
 
+  // Init reactive vars.
   var instance = this;
-
-  // Init reactive var.
   instance.mapBoundsCoordinates = new ReactiveVar(null);
+  // Declare opened infowindow reference.
+  instance.openedInfoWindow = null;
 
   instance.autorun(function () {
-    // Subscribe to the locations publication.
+    // Subscribe to the locations publication and limit results to
+    // what is on the current map view.
     var subscription = instance.subscribe('locations', instance.mapBoundsCoordinates.get());
     if (subscription.ready()) {
       // If at least one location avialable, add marker.
@@ -94,19 +105,19 @@ Template.locationsPage.onCreated(function() {
             });
             // Add event to show infowindow.
             google.maps.event.addListener(marker, 'click', function() {
-              // If this infowindow is open, we do not need to do
-              // anything.
+              // If this infowindow is open, it means user clicked on the same
+              // marker, we do not need to do anything.
               if (infoWindow.isOpen()) {
                 return;
               }
               // Close infowindow that was open previously.
-              if (openedInfoWindow) {
-                openedInfoWindow.close();
+              if (instance.openedInfoWindow) {
+                instance.openedInfoWindow.close();
               }
               // Open the one user clicked on and store its reference in
               // variable, so we can close it later.
               infoWindow.open(map, marker);
-              openedInfoWindow = infoWindow;
+              instance.openedInfoWindow = infoWindow;
             });
             // Add marker to markers array, so we do not recreate it in future.
             markers[location._id] = marker;
