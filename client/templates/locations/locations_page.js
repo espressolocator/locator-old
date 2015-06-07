@@ -81,11 +81,24 @@ Template.locationsPage.onCreated(function() {
               id: location._id
             });
             // Create infowindow.
-            var infoWindow = new google.maps.InfoWindow({
-              content: '<div>'+location.title+'</div>'
+            var infoWindow = new InfoBubble({
+              content: '<div id="content"><h4>'+location.title+'</h4><div>'+location.address+'</div></div>',
+              maxWidth: 300,
+              minHeight: 100,
+              padding: 6,
+              borderRadius: 4,
+              arrowSize: 10,
+              borderWidth: 1,
+              disableAutoPan: true,
+              hideCloseButton: true
             });
             // Add event to show infowindow.
             google.maps.event.addListener(marker, 'click', function() {
+              // If this infowindow is open, we do not need to do
+              // anything.
+              if (infoWindow.isOpen()) {
+                return;
+              }
               // Close infowindow that was open previously.
               if (openedInfoWindow) {
                 openedInfoWindow.close();
