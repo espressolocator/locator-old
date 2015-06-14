@@ -1,13 +1,12 @@
 <template name="locationItem">
   <div class="location">
     <div class="location-content">
-      <h3><a href="{{url}}">{{title}}</a><span>{{domain}}</span></h3>
+      <h3><a href="{{pathFor 'locationPage'}}">{{title}}</a></h3>
       <p>
         submitted by {{createdBy.author}},
         <a href="{{pathFor 'locationPage'}}">{{commentsCount}} comments</a>
-        {{#if canEdit}}<a href="{{pathFor 'locationEdit'}}">Edit</a>{{/if}}
       </p>
     </div>
-    <a href="{{pathFor 'locationPage'}}" class="discuss btn btn-default">Discuss</a>
+    {{#if canEdit}}<a href="{{pathFor 'locationEdit'}}" class="edit-button btn btn-default">Edit</a>{{/if}}
   </div>
 </template>

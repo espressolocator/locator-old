@@ -72,7 +72,7 @@ body {
         color: #aaaaaa; }
     .location .location-content p {
       margin: 0; }
-  .location .discuss {
+  .location .edit-button {
     display: block;
     float: right;
     margin-top: 7px; }
