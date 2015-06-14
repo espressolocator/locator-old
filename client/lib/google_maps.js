@@ -8,7 +8,8 @@ addGeocomplete = function (searchNode, initProperties) {
       streetViewControl: false
     },
     markerOptions: {
-      draggable: true
+      draggable: true,
+      icon: '/logo-icon-marker.png'
     },
     types: ['geocode', 'establishment']
   };
