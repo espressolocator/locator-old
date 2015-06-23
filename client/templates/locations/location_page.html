@@ -1,8 +1,17 @@
 <template name="locationPage">
   <div class="location-page page">
-    {{> locationItem}}
-    <div>
-      {{description}}
+    <div class="location">
+      <div class="location-content">
+        <h3>{{title}}</h3>
+        <p>
+          submitted by {{createdBy.author}},
+          {{commentsCount}} comments
+        </p>
+        <p>
+          {{description}}
+        </p>
+      </div>
+      <div class="map-container-view"></div>
     </div>
     <ul class="comments">
       {{#each comments}}

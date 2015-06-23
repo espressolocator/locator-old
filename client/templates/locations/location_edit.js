@@ -50,7 +50,7 @@ AutoForm.hooks({
 
 Template.locationEdit.onRendered(function() {
   var self = this;
-  this.autorun(function (c) {
+  this.autorun(function(c) {
     if (GoogleMaps.loaded()) {
       var searchNode = self.$("#mapsearch");
       var latlng = AutoForm.getFieldValue('location', 'editLocationForm').split(',');
