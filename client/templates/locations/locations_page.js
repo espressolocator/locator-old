@@ -89,7 +89,7 @@ Template.locationsPage.onCreated(function() {
               position: latLng,
               map: map,
               title: location.title,
-              icon: 'logo-icon-marker.png',
+              icon: '/logo-icon-marker.png',
               id: location._id
             });
             // Create infowindow.

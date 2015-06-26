@@ -26,7 +26,7 @@ Template.locationPage.onRendered(function() {
         position: markerLatLng,
         map: map,
         title: self.data.location.title,
-        icon: 'logo-icon-marker.png',
+        icon: '/logo-icon-marker.png',
         id: self.data.location._id
       });
       c.stop();
