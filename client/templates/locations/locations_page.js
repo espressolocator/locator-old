@@ -13,6 +13,7 @@ Template.locationsPage.onRendered(function() {
         map: instance.$('.map-container'),
         mapOptions: {
           zoom: 12,
+          minZoom: 9,
           scrollwheel: true,
           streetViewControl: false
         },
@@ -35,11 +36,11 @@ Template.locationsPage.onRendered(function() {
           var ne = bounds.getNorthEast();
           var sw = bounds.getSouthWest();
           var boundsCoordinates = [
-            [ne.lng(), ne.lat()],
-            [sw.lng(), ne.lat()],
-            [sw.lng(), sw.lat()],
-            [ne.lng(), sw.lat()],
-            [ne.lng(), ne.lat()]
+            [sw.lng(), ne.lat()], // nw
+            [ne.lng(), ne.lat()], // ne
+            [ne.lng(), sw.lat()], // se
+            [sw.lng(), sw.lat()], // sw
+            [sw.lng(), ne.lat()], // nw
           ];
           instance.mapBoundsCoordinates.set(boundsCoordinates);
         }
