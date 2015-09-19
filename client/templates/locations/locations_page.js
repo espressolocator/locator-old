@@ -21,7 +21,16 @@ Template.locationsPage.onRendered(function() {
           disabled: true
         },
         types: ['(regions)']
+      };
+
+      // If we have some cooridantes stored from previous page visit, use
+      // them.
+      var lastposition = Session.get('lastposition');
+      if (lastposition) {
+        mapProperties.location = lastposition.center;
+        mapProperties.mapOptions.zoom = lastposition.zoom;
       }
+      // Init the map and the search box.
       addGeocomplete(searchLocationInput, mapProperties);
 
       // Map idle state listener. It is useful to track the end of any map
@@ -44,6 +53,11 @@ Template.locationsPage.onRendered(function() {
           ];
           instance.mapBoundsCoordinates.set(boundsCoordinates);
         }
+        // Store the last map position and zoom level in the session variable.
+        var center = map.getCenter();
+        if (center) {
+          Session.set('lastposition', { center: [center.lat(), center.lng()], zoom: map.getZoom() });
+        }
       });
       // Map click event listener.
       google.maps.event.addListener(map, 'click', function(event) {
@@ -64,7 +78,6 @@ Template.locationsPage.onCreated(function() {
   });
   // Declare markers array.
   var markers = {};
-
   // Init reactive vars.
   var instance = this;
   instance.mapBoundsCoordinates = new ReactiveVar(null);
