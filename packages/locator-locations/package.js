@@ -14,9 +14,9 @@ Package.onUse(function(api) {
   api.versionsFrom('1.1.0.2');
 
   var packages = [
-    'aldeed:autoform@5.2.0',
-    'aldeed:collection2@2.3.3',
-    'aldeed:simple-schema@1.3.3'
+    'aldeed:autoform',
+    'aldeed:collection2',
+    'aldeed:simple-schema'
   ];
 
   api.use(packages);
