@@ -29,7 +29,7 @@ Package.onUse(function(api) {
   ], ['client', 'server']);
 
   api.addFiles([
-    'lib/client/templates/location.css',
+    'lib/client/stylesheets/location.css',
     'lib/client/templates/location_edit.html',
     'lib/client/templates/location_edit.js',
     'lib/client/templates/location_item.html',
