@@ -12,9 +12,11 @@
           {{description}}
         </p>
       </div>
+      {{#if isAdminUser}}
       <div class="controls">
-        {{#if isAdminUser}}<a href="{{pathFor 'locationEdit'}}" class="btn btn-default">Edit</a>{{/if}}
+        <a href="{{pathFor 'locationEdit'}}" class="btn btn-default">Edit</a>
       </div>
+      {{/if}}
     </div>
     <ul class="comments">
       {{#each comments}}
