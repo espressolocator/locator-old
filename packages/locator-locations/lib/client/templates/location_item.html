@@ -2,11 +2,7 @@
   <div class="location">
     <div class="location-content">
       <h3><a href="{{pathFor 'locationPage'}}">{{title}}</a></h3>
-      <p>
-        submitted by {{createdBy.author}},
-        <a href="{{pathFor 'locationPage'}}">{{commentsCount}} comments</a>
-      </p>
+      <p>{{commentsCount}} comments</p>
     </div>
-    {{#if canEdit}}<a href="{{pathFor 'locationEdit'}}" class="edit-button btn btn-default">Edit</a>{{/if}}
   </div>
 </template>
