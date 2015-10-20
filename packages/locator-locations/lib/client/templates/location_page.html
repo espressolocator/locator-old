@@ -1,6 +1,7 @@
 <template name="locationPage">
   <div class="location-page page">
     <div class="location">
+      <div class="map-container-view"></div>
       <div class="location-content">
         <h3>{{title}}</h3>
         <p>
@@ -11,7 +12,9 @@
           {{description}}
         </p>
       </div>
-      <div class="map-container-view"></div>
+      <div class="controls">
+        {{#if isAdminUser}}<a href="{{pathFor 'locationEdit'}}" class="btn btn-default">Edit</a>{{/if}}
+      </div>
     </div>
     <ul class="comments">
       {{#each comments}}
