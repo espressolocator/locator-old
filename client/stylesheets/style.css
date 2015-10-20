@@ -70,10 +70,10 @@ body {
         font-size: 14px;
         display: inline-block;
         color: #aaaaaa; }
-  .location .edit-button {
+  .location .controls {
     display: block;
-    float: right;
-    margin-top: 7px; }
+    text-align: right;
+    clear: both; }
 
 .comments {
   list-style-type: none;
