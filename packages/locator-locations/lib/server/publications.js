@@ -1,8 +1,10 @@
 Meteor.publish('locations', function(bounds) {
+  // No boulds are passed, return empty array.
   if (Match.test(bounds, null)) {
       check(bounds, null);
       return [];
   }
+  // If bounds are passed, create Polygon notation and query Locations.
   check(bounds, [[Number]]);
   var polygon = {
     type: "Polygon",

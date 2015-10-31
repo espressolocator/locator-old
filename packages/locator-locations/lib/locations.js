@@ -137,20 +137,11 @@ Locations.attachSchema(locationSchema);
 
 // Posts config namespace
 Locations.config = {};
-Locations.config.locationStatuses = [
-  {
-    value: 1,
-    label: function(){return 'pending';}
-  },
-  {
-    value: 2,
-    label: function(){return 'approved';}
-  },
-  {
-    value: 3,
-    label: function(){return 'rejected';}
-  }
-];
+Locations.config.locationStatuses = {
+    1 : 'pending',
+    2 : 'approved',
+    3 : 'rejected'
+  };
 Locations.config.STATUS_PENDING = 1;
 Locations.config.STATUS_APPROVED = 2;
 Locations.config.STATUS_REJECTED = 3;
