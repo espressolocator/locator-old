@@ -16,7 +16,8 @@ Package.onUse(function(api) {
   var packages = [
     'aldeed:autoform',
     'aldeed:collection2',
-    'aldeed:simple-schema'
+    'aldeed:simple-schema',
+    'kabalin:autoform-geojson-point'
   ];
 
   api.use(packages);

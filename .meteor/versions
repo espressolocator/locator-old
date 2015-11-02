@@ -50,6 +50,7 @@ iron:router@1.0.12
 iron:url@1.0.11
 jeremy:geocomplete@1.6.5_7
 jquery@1.11.4
+kabalin:autoform-geojson-point@0.0.1
 kabalin:googlemaps-js-info-bubble@0.8.0
 launch-screen@1.0.4
 livedata@1.0.15

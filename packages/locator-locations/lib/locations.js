@@ -1,16 +1,3 @@
-// Define SimpleSchema object to store location coordinates.
-twodsphereSchemaObject = {
-  type: {
-    type: String
-  },
-  coordinates: {
-    type: [Number],
-    decimal: true
-  }
-};
-twodsphereSchema = new SimpleSchema(twodsphereSchemaObject);
-
-
 // Define SimpleSchema object
 locationSchemaObject = {
   _id: {
@@ -49,7 +36,7 @@ locationSchemaObject = {
     type: twodsphereSchema,
     index: "2dsphere",
     autoform: {
-      omit: true
+      type: "geojson-point"
     }
   },
   tel: {

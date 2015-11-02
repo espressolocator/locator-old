@@ -18,15 +18,8 @@ AutoForm.hooks({
         if (this.validationContext.keyIsInvalid('url')) {
           this.removeStickyValidationError('url');
         }
-        var latlng = modifier.$set.location.split(',');
-        modifier.$set.location = { type: "Point", coordinates: [ parseFloat(latlng[1]), parseFloat(latlng[0]) ] };
         return modifier;
       }
-    },
-    docToForm: function(doc) {
-      var latlng = doc.location.coordinates.reverse();
-      doc.location = latlng.join(',');
-      return doc;
     },
     formToModifier: function(modifier) {
       // Does not seems work, using "before" hook to amend object.
@@ -53,7 +46,7 @@ Template.locationEdit.onRendered(function() {
   this.autorun(function(c) {
     if (GoogleMaps.loaded()) {
       var searchNode = self.$("#mapsearch");
-      var latlng = AutoForm.getFieldValue('location', 'editLocationForm').split(',');
+      var latlng = AutoForm.getFieldValue('location', 'editLocationForm').coordinates.reverse();
       addGeocomplete(searchNode, {
         details: "#editLocationForm",
         location: new google.maps.LatLng(latlng[0], latlng[1])

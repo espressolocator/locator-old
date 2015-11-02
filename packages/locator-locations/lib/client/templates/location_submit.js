@@ -9,11 +9,6 @@ AutoForm.hooks({
         return doc;
       }
     },
-    formToDoc: function(doc) {
-      var latlng = doc.location.split(',');
-      doc.location = { type: "Point", coordinates: [ parseFloat(latlng[1]), parseFloat(latlng[0]) ] };
-      return doc;
-    },
     onSuccess: function(formType, result) {
       // Reset validation and form prior to redirection.
       this.validationContext.resetValidation();
