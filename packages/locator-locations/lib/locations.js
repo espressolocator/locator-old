@@ -33,10 +33,13 @@ locationSchemaObject = {
     label: "Address"
   },
   location: {
-    type: twodsphereSchema,
+    type: geoJsonSchema,
     index: "2dsphere",
     autoform: {
-      type: "geojson-point"
+      type: 'geojson-point',
+      afFieldInput: {
+        reverse: true
+      }
     }
   },
   tel: {
