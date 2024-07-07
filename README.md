@@ -3,7 +3,7 @@
 This is early proof-of-concept version of EspressoLocator webapp built using
 Meteor 1.2.
 
-For the current package running on https://espressolocator.com, pelase refer to
+For the current package running on https://espressolocator.app, pelase refer to
 [telescope-espressolocator](https://github.com/espressolocator/telescope-espressolocator)
 repo.
 
